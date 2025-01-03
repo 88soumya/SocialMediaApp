@@ -19,7 +19,7 @@ public class EmailSender {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		try {
-			helper.setFrom("sendermail", "JspGram Application");
+			helper.setFrom("soumyabiradar856@gmail.com", "JspGram Application");
 			helper.setTo(to);
 			helper.setSubject("Verify Your Email thru OTP");
 			Context context = new Context();
