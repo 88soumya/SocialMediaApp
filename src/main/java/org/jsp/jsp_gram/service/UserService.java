@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.jsp.jsp_gram.dto.User;
 import org.jsp.jsp_gram.helper.AES;
+import org.jsp.jsp_gram.helper.EmailSender;
 import org.jsp.jsp_gram.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class UserService {
 	
 	@Autowired
 	UserRepository repository;
+	@Autowired
+	EmailSender emailSender;
+
 	public String loadRegister(ModelMap map, User user) {
 		map.put("user", user);
 		return "register.html";
@@ -36,6 +40,7 @@ public class UserService {
 			user.setPassword(AES.encrypt(user.getPassword()));
 			int otp = new Random().nextInt(100000, 1000000);
 			user.setOtp(otp);
+//			emailSender.sendOtp(user.getEmail(), otp, user.getFirstname());
 			System.err.println(otp);
 			repository.save(user);
 			return "redirect:/otp/" + user.getId();
